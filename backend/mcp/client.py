@@ -30,7 +30,7 @@ class MCPClient:
 
     @classmethod
     def connect_default(cls, registry: ToolRegistry) -> "MCPClient":
-        port = int(os.environ.get("MCP_PORT", 8000))
+        port = int(os.environ.get("MCP_PORT", 1813))
         url = os.environ.get("MCP_SERVER_URL") or f"http://localhost:{port}"
         return cls(url).connect(registry)
 

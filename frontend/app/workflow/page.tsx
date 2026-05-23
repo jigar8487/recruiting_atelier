@@ -164,7 +164,7 @@ const INFRA = [
     tone: "ember",
     body: (
       <>
-        A separate FastAPI JSON-RPC server on <code>:8000</code> exposes
+        A separate FastAPI JSON-RPC server on <code>:1813</code> exposes
         remote tools (mocked ATS / calendar / email). On startup the MCP
         client registers them through the <em>same</em> ToolRegistry — so
         agents dispatch local and remote tools identically.
