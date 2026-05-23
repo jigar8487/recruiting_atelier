@@ -6,12 +6,12 @@ install:
 
 dev:
 	npx --yes concurrently -n api,mcp,web -c blue,magenta,green \
-	  "cd backend && . .venv/bin/activate && uvicorn api.app:create_app --factory --reload --port 8011" \
+	  "cd backend && . .venv/bin/activate && uvicorn api.app:create_app --factory --reload --port 1812" \
 	  "cd backend && . .venv/bin/activate && python -m mcp.server" \
 	  "cd frontend && npm run dev"
 
 backend:
-	cd backend && . .venv/bin/activate && uvicorn api.app:create_app --factory --reload --port 8011
+	cd backend && . .venv/bin/activate && uvicorn api.app:create_app --factory --reload --port 1812
 
 mcp:
 	cd backend && . .venv/bin/activate && python -m mcp.server

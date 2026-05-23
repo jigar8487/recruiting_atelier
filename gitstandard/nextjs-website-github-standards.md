@@ -68,7 +68,7 @@ All **new work** ships through the standard `dev → stage → main` flow define
 | Embeddings | **Chroma all-MiniLM-L6-v2 (local)** or provider | `KB_EMBED_BACKEND=local\|provider` |
 | Observability | **Langfuse** with print-fallback | `LANGFUSE_PUBLIC_KEY` / `LANGFUSE_SECRET_KEY` optional |
 | File extraction | **pypdf**, **python-docx** | `services/text_extract.py` is the single entry point; PDF reflow step in `_reflow_pdf_text` |
-| MCP | **Separate FastAPI JSON-RPC server on `:8000`** | `python -m mcp.server` — client auto-registers remote tools through the same registry |
+| MCP | **Separate FastAPI JSON-RPC server on `:1813`** | `python -m mcp.server` — client auto-registers remote tools through the same registry |
 | Agent cast | **Meera · Kavya · Anaya · Diya · Tara · Riya** | Meera supervises; Kavya is a preflight Vetter (duplicate detection); Anaya/Diya/Tara/Riya are the four main-loop specialists |
 | Persistent runtime state | JSON files at repo root | `./.scoring-config.json` (Diya weights) · `./.demo-config.json` (pacing) · `./.seen-resumes.json` (Kavya dedup store) · `./.chroma-shortlists/` (Tara's history). **All gitignored.** |
 
@@ -118,7 +118,7 @@ npm run lint
 npm run build                                 # `.next/` produced; no TS errors
 
 # End-to-end local
-make dev                                      # starts API:8011, MCP:8000, web:3000
+make dev                                      # starts API:1812, MCP:1813, web:3000
 ```
 
 ---
@@ -311,7 +311,7 @@ recruiting-atelier/
 │   │   ├── types.ts              # Zod (mirrors Pydantic)
 │   │   └── runHistory.ts         # localStorage past-scans
 │   ├── tailwind.config.ts        # Brand palette + font families
-│   ├── next.config.mjs           # Rewrites /api/* → http://localhost:8011
+│   ├── next.config.mjs           # Rewrites /api/* → http://localhost:1812
 │   ├── .env.example
 │   └── package.json
 ├── doc/
@@ -384,8 +384,8 @@ Backend (`backend/.env`, template in `.env.example`):
 | `LLM_EMBED_PROVIDER` | Provider for embeddings when the chat provider doesn't support them |
 | `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` / `OPENROUTER_API_KEY` / `NVIDIA_API_KEY` | Provider credentials |
 | `LANGFUSE_PUBLIC_KEY` / `LANGFUSE_SECRET_KEY` / `LANGFUSE_HOST` | Optional observability |
-| `API_PORT` (default `8011`) | FastAPI port |
-| `MCP_PORT` (default `8000`) | MCP server port |
+| `API_PORT` (default `1812`) | FastAPI port |
+| `MCP_PORT` (default `1813`) | MCP server port |
 | `FRONTEND_ORIGIN` (default `http://localhost:3000`) | CORS allowlist origin |
 | `MAX_ITERATIONS` (default `10`) | ReAct loop ceiling |
 | `TOP_N` (default `3`) | Default shortlist size |
@@ -397,7 +397,7 @@ Frontend (`frontend/.env.example`):
 
 | Variable | Purpose |
 | -------- | ------- |
-| `NEXT_PUBLIC_API_BASE` (default `http://localhost:8011`) | Backend base URL; consumed by `next.config.mjs` rewrites |
+| `NEXT_PUBLIC_API_BASE` (default `http://localhost:1812`) | Backend base URL; consumed by `next.config.mjs` rewrites |
 
 ❌ Never commit secrets. The gitignore is the second line of defense — the first is your eyes during `git status`.
 

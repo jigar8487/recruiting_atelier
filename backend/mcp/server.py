@@ -1,8 +1,8 @@
 """MCP server (D9) — FastAPI JSON-RPC over HTTP.
 
 Exposes three HR tools as JSON-RPC. All implementations are mocked but return
-realistic shapes. Runs on MCP_PORT (default 8000) — separate process from the
-main HTTP API on API_PORT (default 8001).
+realistic shapes. Runs on MCP_PORT (default 1813) — separate process from the
+main HTTP API on API_PORT (default 1812).
 
 Run with:    python -m mcp.server
 """
@@ -136,7 +136,7 @@ def create_mcp_app() -> FastAPI:
 def main() -> None:
     logging.basicConfig(level=logging.INFO,
                         format="%(asctime)s %(levelname)s %(name)s: %(message)s")
-    port = int(os.environ.get("MCP_PORT", 8000))
+    port = int(os.environ.get("MCP_PORT", 1813))
     log.info("Starting MCP server on http://localhost:%d", port)
     uvicorn.run(create_mcp_app(), host="0.0.0.0", port=port)
 

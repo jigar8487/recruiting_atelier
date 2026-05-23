@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const apiBase = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8011";
+const apiBase = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:1812";
 
 const nextConfig = {
   reactStrictMode: true,

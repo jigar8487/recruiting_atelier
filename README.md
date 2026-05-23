@@ -122,7 +122,7 @@ A full breakdown — diagram, phase-by-phase, worked example — lives at [`/wor
               └───────────────────────┬──────────────────────────────┘
                                       │  REST  +  SSE
                                       ▼
-                FastAPI HTTP API  (api/v1/*)                  :8011
+                FastAPI HTTP API  (api/v1/*)                  :1812
                                       │
                                       ▼
                 ReAct loop  (runner.py)   ───►   Supervisor (planner + router)
@@ -135,7 +135,7 @@ A full breakdown — diagram, phase-by-phase, worked example — lives at [`/wor
             ▼                         ▼                              ▼
       Tool Registry             In-memory KB                    MCP Client
       (D3 singleton)            (D6 Chroma                ────────────────►
-      • TOOLS list               EphemeralClient)              MCP Server  :8000
+      • TOOLS list               EphemeralClient)              MCP Server  :1813
       • TOOL_MAP dict            • chunk · embed · ingest      (FastAPI JSON-RPC)
       • register_module()        • update_text() preserves id
 ```
@@ -185,7 +185,7 @@ make dev
 
 Open <http://localhost:3000>.
 
-`make dev` starts the **API on `:8011`**, the **MCP server on `:8000`**, and the **Next.js dev server on `:3000`** in parallel. If port `3000` is already taken by another project, start the frontend with `PORT=3001 npm run dev` (in `frontend/`) and update `FRONTEND_ORIGIN` in `backend/.env` to match — CORS uses an explicit allowlist.
+`make dev` starts the **API on `:1812`**, the **MCP server on `:1813`**, and the **Next.js dev server on `:3000`** in parallel. If port `3000` is already taken by another project, start the frontend with `PORT=3001 npm run dev` (in `frontend/`) and update `FRONTEND_ORIGIN` in `backend/.env` to match — CORS uses an explicit allowlist.
 
 ---
 
@@ -196,7 +196,7 @@ Use this if you prefer per-service control over `make dev`.
 ```bash
 # Terminal 1 — HTTP API
 cd backend && source .venv/bin/activate
-uvicorn api.app:create_app --factory --reload --port 8011
+uvicorn api.app:create_app --factory --reload --port 1812
 
 # Terminal 2 — MCP server (separate process by design)
 cd backend && source .venv/bin/activate
@@ -218,8 +218,8 @@ All backend config lives in `backend/.env` (copy from `.env.example`). Frontend 
 | `LLM_EMBED_PROVIDER` | Provider used for embeddings when the chat provider doesn't support them |
 | `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` / `OPENROUTER_API_KEY` / `NVIDIA_API_KEY` | Provider credentials — set the ones you intend to use |
 | `LANGFUSE_PUBLIC_KEY` + `LANGFUSE_SECRET_KEY` | Optional. If unset, traces fall back to in-memory + print |
-| `MCP_PORT` (default `8000`) | Port for the MCP server |
-| `API_PORT` (default `8011`) | Port for the HTTP API |
+| `MCP_PORT` (default `1813`) | Port for the MCP server |
+| `API_PORT` (default `1812`) | Port for the HTTP API |
 | `FRONTEND_ORIGIN` (default `http://localhost:3000`) | CORS allowlisted origin — set to `http://localhost:3001` if your frontend runs there |
 | `MAX_ITERATIONS` (default `10`) | Hard upper bound on supervisor ReAct iterations |
 | `TOP_N` (default `3`) | Default shortlist size — overridable per run |
@@ -293,7 +293,7 @@ def register_into(registry):
 
 ## API reference
 
-All endpoints are mounted under `/api/v1/`. OpenAPI docs auto-publish at `http://localhost:8011/api/v1/docs`.
+All endpoints are mounted under `/api/v1/`. OpenAPI docs auto-publish at `http://localhost:1812/api/v1/docs`.
 
 | Method | Path | Purpose |
 |---|---|---|
@@ -435,7 +435,7 @@ This exercises the entire ReAct loop, all four pipeline agents, the supervisor's
 For a smoke run against your *real* configured provider, use the UI or:
 
 ```bash
-curl -X POST http://localhost:8011/api/v1/run \
+curl -X POST http://localhost:1812/api/v1/run \
   -H 'content-type: application/json' \
   -d @backend/tests/integration/example_run_request.json
 ```
