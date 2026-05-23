@@ -1,0 +1,448 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Brand tokens (jigarjoshi.in editorial system) ---------------------- */
+:root {
+  --cream: #F9F5F0;
+  --wheat: #F2EAD3;
+  --ink:   #344F1F;
+  --ember: #F4991A;
+  --rust:  #A8321A;
+  --hair:  rgba(52, 79, 31, 0.20);
+  --hair-strong: rgba(52, 79, 31, 0.45);
+}
+
+html { color-scheme: light only; }
+
+html, body {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+/* Subtle paper grain — printed-page atmosphere, near-invisible but felt. */
+body {
+  font-family: var(--font-body), "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "ss01", "ss02";
+  background-image:
+    radial-gradient(rgba(52,79,31,0.025) 1px, transparent 1px),
+    radial-gradient(rgba(52,79,31,0.020) 1px, transparent 1px);
+  background-position: 0 0, 8px 8px;
+  background-size: 16px 16px, 16px 16px;
+}
+
+::selection { background: var(--ember); color: var(--cream); }
+
+/* --- Typography utilities ---------------------------------------------- */
+.font-display { font-family: var(--font-display), "Source Serif 4", Georgia, serif; }
+.font-sans    { font-family: var(--font-body), "Inter Tight", ui-sans-serif, system-ui; }
+.font-mono    { font-family: var(--font-mono), "JetBrains Mono", ui-monospace, monospace; }
+
+.eyebrow {
+  font-family: var(--font-body), "Inter Tight", system-ui;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.65;
+}
+
+.deck {
+  font-family: var(--font-display), "Source Serif 4", Georgia, serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--ink);
+  opacity: 0.78;
+}
+
+.headline {
+  font-family: var(--font-display), "Source Serif 4", Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  line-height: 1.05;
+}
+
+.rule { border-top: 1px solid var(--hair); }
+.rule-strong { border-top: 1px solid var(--hair-strong); }
+
+/* Asterism — used as a section divider mark */
+.asterism::before {
+  content: "⁂";
+  display: block;
+  text-align: center;
+  font-family: var(--font-display), "Source Serif 4", Georgia, serif;
+  color: var(--ember);
+  font-size: 1.25rem;
+  letter-spacing: 0.5em;
+  padding-left: 0.5em;
+}
+
+/* --- Surfaces ---------------------------------------------------------- */
+.card {
+  background: var(--cream);
+  border: 1px solid var(--hair);
+  padding: 1.25rem 1.5rem;
+  position: relative;
+}
+
+.card-wheat {
+  background: var(--wheat);
+  border: 1px solid var(--hair);
+  padding: 1.25rem 1.5rem;
+}
+
+/* A "letter" card: with a tucked top-corner mark */
+.letter {
+  background: var(--cream);
+  border: 1px solid var(--hair);
+  padding: 1.75rem 1.75rem 1.5rem;
+  position: relative;
+}
+.letter::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: -1px;
+  width: 14px; height: 14px;
+  border-top: 1px solid var(--ember);
+  border-left: 1px solid var(--ember);
+}
+.letter::after {
+  content: "";
+  position: absolute;
+  bottom: -1px; right: -1px;
+  width: 14px; height: 14px;
+  border-bottom: 1px solid var(--ember);
+  border-right: 1px solid var(--ember);
+}
+
+/* --- Buttons ----------------------------------------------------------- */
+/*
+ * Three variants, one geometry. All buttons share a 34px target height,
+ * 0.18em tracked uppercase label, and an SVG glyph slot that vertically
+ * centers via flex. The hover is a subtle wheat wash; primary darkens
+ * gently rather than inverting hard.
+ */
+.btn,
+.btn-primary,
+.btn-ghost,
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 34px;
+  padding: 0 0.95rem;
+  font-family: var(--font-body), system-ui;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  background: transparent;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  transition:
+    background-color 140ms ease,
+    color 140ms ease,
+    border-color 140ms ease,
+    transform 90ms ease,
+    box-shadow 140ms ease;
+}
+.btn:hover,
+.btn-ghost:hover,
+.btn-danger:hover {
+  background: var(--wheat);
+}
+.btn:active,
+.btn-primary:active,
+.btn-ghost:active,
+.btn-danger:active {
+  transform: translateY(1px);
+}
+.btn:disabled,
+.btn-primary:disabled,
+.btn-ghost:disabled,
+.btn-danger:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+  pointer-events: none;
+}
+.btn > svg,
+.btn-primary > svg,
+.btn-ghost > svg,
+.btn-danger > svg {
+  flex-shrink: 0;
+}
+
+/* Primary — filled ember, darken on hover (does not invert to ink). */
+.btn-primary {
+  border-color: var(--ember);
+  background: var(--ember);
+  color: var(--cream);
+  box-shadow: 0 1px 0 rgba(52, 79, 31, 0.10);
+}
+.btn-primary:hover {
+  background: #DE860D; /* darker ember */
+  border-color: #DE860D;
+}
+
+/* Ghost — no border, low chrome, sits in dense rows. */
+.btn-ghost {
+  border-color: transparent;
+  padding: 0 0.7rem;
+  height: 30px;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+}
+.btn-ghost:hover { background: var(--wheat); }
+
+/* Danger — outlined rust, fills on hover. */
+.btn-danger {
+  border-color: var(--rust);
+  color: var(--rust);
+}
+.btn-danger:hover {
+  background: var(--rust);
+  border-color: var(--rust);
+  color: var(--cream);
+}
+
+/* --- Forms ------------------------------------------------------------- */
+.input {
+  width: 100%;
+  background: var(--cream);
+  border: none;
+  border-bottom: 1px solid var(--hair-strong);
+  padding: 0.5rem 0.25rem;
+  font-family: var(--font-body), system-ui;
+  font-size: 0.875rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 150ms ease;
+}
+.input:focus { border-bottom-color: var(--ember); }
+
+textarea.input {
+  border: 1px solid var(--hair-strong);
+  padding: 0.75rem;
+  background: var(--cream);
+  line-height: 1.55;
+}
+textarea.input:focus { border-color: var(--ember); }
+
+select.input {
+  border: 1px solid var(--hair-strong);
+  padding: 0.45rem 0.7rem;
+  background-color: var(--cream);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23344F1F' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M7 10 L12 15 L17 10'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.65rem center;
+  background-size: 14px 14px;
+  padding-right: 2rem;
+  cursor: pointer;
+}
+select.input:hover {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23F4991A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M7 10 L12 15 L17 10'/></svg>");
+}
+select.input::-ms-expand { display: none; }
+
+.label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-family: var(--font-body), system-ui;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.65;
+}
+
+/* --- Pills / tags ------------------------------------------------------ */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-body), system-ui;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+}
+.pill-ember { color: var(--ember); }
+.pill-ink   { color: var(--ink); }
+.pill-rust  { color: var(--rust); }
+
+/* --- Misc / motion ----------------------------------------------------- */
+@keyframes slow-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.45; }
+}
+.pulse { animation: slow-pulse 1.6s ease-in-out infinite; }
+
+@keyframes orbit-spin {
+  to { transform: rotate(360deg); }
+}
+.orbit { animation: orbit-spin 1.4s linear infinite; transform-origin: center; }
+
+.cursor::after { content: "▍"; color: var(--ember); animation: slow-pulse 1.1s ease-in-out infinite; }
+
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible { outline: 1px solid var(--ember); outline-offset: 2px; }
+
+/* --- Editorial prose (TipTap editor body) ------------------------------ */
+.prose-editorial {
+  font-family: var(--font-body), system-ui;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink);
+  min-height: 100%;
+}
+.prose-editorial > * + * { margin-top: 0.85rem; }
+
+.prose-editorial p { font-family: var(--font-body), system-ui; }
+.prose-editorial p:has(> br:only-child) { min-height: 1.5rem; }
+
+.prose-editorial h1,
+.prose-editorial h2,
+.prose-editorial h3 {
+  font-family: var(--font-display), "Source Serif 4", Georgia, serif;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin-top: 1.5rem;
+}
+.prose-editorial h1 { font-size: 30px; font-weight: 600; }
+.prose-editorial h2 { font-size: 24px; font-weight: 600; }
+.prose-editorial h3 { font-size: 19px; font-weight: 500; font-style: italic; }
+
+.prose-editorial strong { color: var(--ink); font-weight: 700; }
+.prose-editorial em { font-style: italic; }
+.prose-editorial u { text-decoration: underline; text-underline-offset: 3px; }
+
+.prose-editorial a {
+  color: var(--ember);
+  border-bottom: 1px solid var(--ember);
+}
+
+.prose-editorial ul,
+.prose-editorial ol {
+  padding-left: 1.5rem;
+}
+.prose-editorial ul { list-style: disc; }
+.prose-editorial ol { list-style: decimal; }
+.prose-editorial li { margin-top: 0.25rem; }
+.prose-editorial li::marker { color: var(--ember); }
+
+.prose-editorial blockquote {
+  border-left: 2px solid var(--ember);
+  padding: 0.25rem 0 0.25rem 1rem;
+  font-family: var(--font-display), "Source Serif 4", Georgia, serif;
+  font-style: italic;
+  font-size: 17px;
+  color: rgba(52,79,31,0.78);
+}
+
+.prose-editorial code {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.875em;
+  background: var(--wheat);
+  padding: 0.05em 0.35em;
+  border: 1px solid var(--hair);
+}
+.prose-editorial pre {
+  background: var(--wheat);
+  border: 1px solid var(--hair);
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.prose-editorial pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.prose-editorial hr {
+  border: 0;
+  border-top: 1px solid var(--hair);
+  margin: 1.5rem 0;
+}
+
+/* TipTap placeholder */
+.prose-editorial p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: rgba(52,79,31,0.40);
+  pointer-events: none;
+  height: 0;
+  font-style: italic;
+  font-family: var(--font-display), "Source Serif 4", Georgia, serif;
+  font-size: 17px;
+}
+
+/* Hairline as background (for tiny dividers) */
+.bg-hairline { background: var(--hair); }
+
+/* --- Brand range slider (used by ScoringConfigEditor) ------------------ */
+.brand-range {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  height: 24px;
+  cursor: pointer;
+}
+.brand-range:disabled { opacity: 0.4; cursor: not-allowed; }
+.brand-range::-webkit-slider-runnable-track {
+  height: 2px;
+  background: var(--hair-strong);
+  border-radius: 999px;
+}
+.brand-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -7px;
+  background: var(--ember);
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 1px 0 rgba(52, 79, 31, 0.15);
+}
+.brand-range::-webkit-slider-thumb:hover {
+  background: #DE860D;
+}
+.brand-range::-moz-range-track {
+  height: 2px;
+  background: var(--hair-strong);
+  border-radius: 999px;
+}
+.brand-range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--ember);
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.brand-range:focus-visible { outline: none; }
+.brand-range:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--ember);
+  outline-offset: 2px;
+}

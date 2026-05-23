@@ -1,0 +1,15 @@
+Alex Chen
+alex.chen@example.com
+
+Summary
+Senior front-end engineer with 7 years of professional React experience. Built and shipped customer-facing SaaS products end-to-end with React, TypeScript, and Next.js. Strong opinions on performance and accessibility.
+
+Experience
+- Acme Corp (2020-present): Lead front-end engineer. Migrated legacy codebase to Next.js + TypeScript. Mentored 4 engineers. Owned design-system component library.
+- Beta Inc (2017-2020): React developer. Built customer dashboard with React, Redux, and GraphQL.
+
+Skills
+React, TypeScript, JavaScript, Next.js, GraphQL, Redux, Zustand, Tailwind, accessibility, performance optimization
+
+Education
+B.S. Computer Science, State University, 2017

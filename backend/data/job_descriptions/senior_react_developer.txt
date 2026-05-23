@@ -1,0 +1,21 @@
+Senior React Developer
+
+We are looking for a Senior React Developer to join our product team. You will own the front-end of our flagship SaaS product, mentor mid-level engineers, and help shape our component architecture.
+
+Minimum qualifications:
+- 3+ years of professional React development
+- Strong TypeScript skills
+- Experience with state management (Redux, Zustand, or similar)
+- Familiarity with REST APIs and modern build tooling
+
+Nice to have:
+- Experience with Next.js or Remix
+- GraphQL exposure
+- Performance optimization track record
+- Component library / design-system experience
+
+Responsibilities:
+- Architect and ship customer-facing features in React + TypeScript
+- Drive code-review quality and front-end best practices
+- Collaborate with designers and product to deliver polished UX
+- Mentor junior and mid-level engineers

@@ -1,0 +1,14 @@
+Jamie Park
+jamie.park@example.com
+
+Summary
+Junior full-stack developer with 1 year of professional experience. Worked on internal tools using React and Node.js. Eager to grow.
+
+Experience
+- Tools Co (2024-present): Junior developer. Built internal CRUD tools with React.
+
+Skills
+React, JavaScript, Node, HTML, CSS
+
+Education
+B.S. Information Systems, City College, 2024

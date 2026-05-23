@@ -1,0 +1,15 @@
+Sam Rivera
+sam.rivera@example.com
+
+Summary
+Mid-level front-end engineer with 4 years of professional experience. Split time between React and Vue projects. Strong fundamentals in JavaScript and component design.
+
+Experience
+- Gamma LLC (2022-present): Front-end engineer. Built Vue.js dashboard, then ported to React for shared design-system reuse.
+- Delta Studio (2021-2022): Junior developer. Maintained React widgets for a content marketing platform.
+
+Skills
+React, Vue, JavaScript, TypeScript, REST, Tailwind, accessibility
+
+Education
+B.S. Software Engineering, Coast University, 2021
